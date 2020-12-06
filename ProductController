@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Product;
+use Illuminate\Http\Request;
+
+class ProductController extends Controller
+{
+    public function index()
+    {
+        $record = Product::all();
+
+        return response()->json($record);
+    }
+
+    public function create(Request $request)
+    {
+        $record = new Product;
+        $record->name = $request->name;
+        $record->description = $request->description;
+        $record->save();
+
+        return response()->json(['status' => true, 'message' => 'Record created']);
+    }
+}
